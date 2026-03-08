@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-sfcc-a11y",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.0",
   "description": "ESLint plugin for WCAG accessibility checks on SFCC ISML templates and library XML content assets",
   "main": "index.js",
   "files": [
@@ -19,8 +19,16 @@
     "a11y",
     "wcag"
   ],
-  "author": "",
+  "author": "Nicola Carkaxhija",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolacarkaxhija/eslint-plugin-sfcc-a11y.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nicolacarkaxhija/eslint-plugin-sfcc-a11y/issues"
+  },
+  "homepage": "https://github.com/nicolacarkaxhija/eslint-plugin-sfcc-a11y#readme",
   "peerDependencies": {
     "@html-eslint/parser": ">=0.23.0",
     "eslint": ">=8.0.0"
