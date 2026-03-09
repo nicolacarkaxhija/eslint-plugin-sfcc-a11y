@@ -37,6 +37,12 @@ const rules = {
   'no-access-key': require('./lib/rules/no-access-key.js'),
   'no-autofocus': require('./lib/rules/no-autofocus.js'),
   'scope-attr-valid': require('./lib/rules/scope-attr-valid.js'),
+  'lang-value': require('./lib/rules/lang-value.js'),
+  'object-alt': require('./lib/rules/object-alt.js'),
+  'aria-hidden-on-focusable': require('./lib/rules/aria-hidden-on-focusable.js'),
+  'no-noninteractive-tabindex': require('./lib/rules/no-noninteractive-tabindex.js'),
+  'autocomplete-valid': require('./lib/rules/autocomplete-valid.js'),
+  'role-supports-aria-props': require('./lib/rules/role-supports-aria-props.js'),
 };
 
 /** All recommended rules set to "warn". */
