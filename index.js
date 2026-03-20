@@ -16,6 +16,18 @@
 
 const htmlParser = require('@html-eslint/parser');
 const xmlProcessor = require('./lib/processors/xml-content-asset.js');
+const { sanitize } = require('./lib/preprocessors/isml-sanitizer.js');
+
+const ismlSanitizerProcessor = {
+  meta: { name: 'sfcc-a11y/isml-sanitizer', version: '0.1.0' },
+  preprocess(text, filename) {
+    return [{ text: sanitize(text), filename: filename + '/__sanitized.html' }];
+  },
+  postprocess(messages) {
+    return messages[0];
+  },
+  supportsAutofix: false,
+};
 
 const rules = {
   'img-alt': require('./lib/rules/img-alt.js'),
@@ -54,23 +66,25 @@ const plugin = {
   rules,
   processors: {
     '.xml': xmlProcessor,
+    'isml-sanitizer': ismlSanitizerProcessor,
   },
 
   // ─── ESLint v8 legacy config ────────────────────────────────────────────────
+  // Virtual file names produced by preprocess() are matched against overrides.
+  // ISML sanitizer → '<file>.isml/__sanitized.html'
+  // XML processor  → '<file>.xml/block_N.html'
   configs: {
     recommended: {
       plugins: ['sfcc-a11y'],
       overrides: [
-        {
-          files: ['**/*.isml'],
-          parser: '@html-eslint/parser',
-          rules: recommendedRules,
-        },
-        {
-          files: ['**/libraries/**/*.xml'],
-          processor: 'sfcc-a11y/.xml',
-          rules: recommendedRules,
-        },
+        // 1. Apply ISML sanitizer (replaces ${...} with __ISML_EXPR__ before parse)
+        { files: ['**/*.isml'], processor: 'sfcc-a11y/isml-sanitizer' },
+        // 2. Parse sanitized virtual file with accessibility rules
+        { files: ['**/*.isml/__sanitized.html'], parser: '@html-eslint/parser', rules: recommendedRules },
+        // 3. Extract HTML blocks from XML content assets
+        { files: ['**/libraries/**/*.xml'], processor: 'sfcc-a11y/.xml' },
+        // 4. Apply rules to extracted HTML blocks
+        { files: ['**/libraries/**/*.xml/block_*.html'], parser: '@html-eslint/parser', rules: recommendedRules },
       ],
     },
   },
@@ -78,18 +92,14 @@ const plugin = {
 
 // ─── ESLint v9 flat config ─────────────────────────────────────────────────
 plugin.configs['flat/recommended'] = [
-  {
-    files: ['**/*.isml'],
-    plugins: { 'sfcc-a11y': plugin },
-    languageOptions: { parser: htmlParser },
-    rules: recommendedRules,
-  },
-  {
-    files: ['**/libraries/**/*.xml'],
-    plugins: { 'sfcc-a11y': plugin },
-    processor: xmlProcessor,
-    rules: recommendedRules,
-  },
+  // 1. Apply ISML sanitizer
+  { files: ['**/*.isml'], plugins: { 'sfcc-a11y': plugin }, processor: ismlSanitizerProcessor },
+  // 2. Parse sanitized virtual file with rules
+  { files: ['**/*.isml/__sanitized.html'], plugins: { 'sfcc-a11y': plugin }, languageOptions: { parser: htmlParser }, rules: recommendedRules },
+  // 3. Extract HTML blocks from XML content assets
+  { files: ['**/libraries/**/*.xml'], plugins: { 'sfcc-a11y': plugin }, processor: xmlProcessor },
+  // 4. Apply rules to extracted HTML blocks
+  { files: ['**/libraries/**/*.xml/block_*.html'], plugins: { 'sfcc-a11y': plugin }, languageOptions: { parser: htmlParser }, rules: recommendedRules },
 ];
 
 module.exports = plugin;

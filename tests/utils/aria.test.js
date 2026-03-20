@@ -5,6 +5,7 @@ import {
   getAriaPropType,
   getRequiredPropsForRole,
   isAbstractRole,
+  getSupportedPropsForRole,
 } from '../../lib/utils/aria.js';
 
 describe('isValidAriaRole', () => {
@@ -55,6 +56,18 @@ describe('getRequiredPropsForRole', () => {
 
   it('returns an empty array for an unknown role', () => {
     expect(getRequiredPropsForRole('not-a-role')).toEqual([]);
+  });
+});
+
+describe('getSupportedPropsForRole', () => {
+  it('returns supported props for a known role', () => {
+    const props = getSupportedPropsForRole('button');
+    expect(Array.isArray(props)).toBe(true);
+    expect(props).toContain('aria-label');
+  });
+
+  it('returns an empty array for an unknown role', () => {
+    expect(getSupportedPropsForRole('not-a-role')).toEqual([]);
   });
 });
 
