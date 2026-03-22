@@ -45,23 +45,33 @@ The `recommended` config automatically:
 
 All rules implement WCAG 2.2 success criteria at Level A or AA.
 
-| Rule                                                                     | WCAG SC | Level | Description                                                     |
-| ------------------------------------------------------------------------ | ------- | ----- | --------------------------------------------------------------- |
-| [`img-alt`](docs/rules/img-alt.md)                                       | 1.1.1   | A     | `<img>` must have a non-empty `alt` attribute                   |
-| [`label`](docs/rules/label.md)                                           | 1.3.1   | A     | Form controls must have an associated label                     |
-| [`html-has-lang`](docs/rules/html-has-lang.md)                           | 3.1.1   | A     | `<html>` must have a non-empty `lang` attribute                 |
-| [`link-name`](docs/rules/link-name.md)                                   | 2.4.4   | A     | `<a>` must have discernible text or `aria-label`                |
-| [`button-name`](docs/rules/button-name.md)                               | 4.1.2   | A     | `<button>` must have discernible text or `aria-label`           |
-| [`heading-has-content`](docs/rules/heading-has-content.md)               | 2.4.6   | AA    | `<h1>`–`<h6>` must have non-empty content                       |
-| [`anchor-is-valid`](docs/rules/anchor-is-valid.md)                       | 2.4.4   | A     | `<a>` must have a navigating `href`                             |
-| [`no-distracting-elements`](docs/rules/no-distracting-elements.md)       | 2.2.2   | A     | Forbid `<marquee>` and `<blink>`                                |
-| [`tabindex-no-positive`](docs/rules/tabindex-no-positive.md)             | 2.4.3   | AA    | `tabindex` must not be greater than 0                           |
-| [`aria-role`](docs/rules/aria-role.md)                                   | 4.1.2   | A     | `role` value must be a valid, non-abstract ARIA role            |
-| [`aria-props`](docs/rules/aria-props.md)                                 | 4.1.2   | A     | `aria-*` attribute names must be valid ARIA properties          |
-| [`aria-required-attr`](docs/rules/aria-required-attr.md)                 | 4.1.2   | A     | Required ARIA attributes for a role must be present             |
-| [`aria-proptypes`](docs/rules/aria-proptypes.md)                         | 4.1.2   | A     | `aria-*` values must match the expected type                    |
-| [`no-redundant-role`](docs/rules/no-redundant-role.md)                   | 4.1.2   | AA    | Explicit `role` must not duplicate the element's implicit role  |
-| [`interactive-supports-focus`](docs/rules/interactive-supports-focus.md) | 2.1.1   | A     | Elements with interactive ARIA roles must be keyboard-focusable |
+| Rule                                                                             | WCAG SC | Level | Description                                                          |
+| -------------------------------------------------------------------------------- | ------- | ----- | -------------------------------------------------------------------- |
+| [`img-alt`](docs/rules/img-alt.md)                                               | 1.1.1   | A     | `<img>` must have a non-empty `alt` attribute                        |
+| [`object-alt`](docs/rules/object-alt.md)                                         | 1.1.1   | A     | `<object>` must have an accessible text alternative                  |
+| [`media-has-caption`](docs/rules/media-has-caption.md)                           | 1.2.2   | A     | `<video>` must have a `<track kind="captions">` child                |
+| [`label`](docs/rules/label.md)                                                   | 1.3.1   | A     | Form controls must have an associated label                          |
+| [`scope-attr-valid`](docs/rules/scope-attr-valid.md)                             | 1.3.1   | A     | `scope` on `<th>` must be `col`, `row`, `colgroup`, or `rowgroup`    |
+| [`autocomplete-valid`](docs/rules/autocomplete-valid.md)                         | 1.3.5   | AA    | `autocomplete` attribute must use valid tokens                       |
+| [`interactive-supports-focus`](docs/rules/interactive-supports-focus.md)         | 2.1.1   | A     | Elements with interactive ARIA roles must be keyboard-focusable      |
+| [`no-noninteractive-tabindex`](docs/rules/no-noninteractive-tabindex.md)         | 2.1.1   | A     | Disallow `tabindex >= 0` on non-interactive elements                 |
+| [`no-access-key`](docs/rules/no-access-key.md)                                   | 2.1.4   | A     | Disallow `accesskey` attribute                                       |
+| [`no-distracting-elements`](docs/rules/no-distracting-elements.md)               | 2.2.2   | A     | Forbid `<marquee>` and `<blink>`                                     |
+| [`no-autofocus`](docs/rules/no-autofocus.md)                                     | 2.4.3   | A     | Disallow `autofocus` attribute                                       |
+| [`tabindex-no-positive`](docs/rules/tabindex-no-positive.md)                     | 2.4.3   | AA    | `tabindex` must not be greater than 0                                |
+| [`anchor-is-valid`](docs/rules/anchor-is-valid.md)                               | 2.4.4   | A     | `<a>` must have a navigating `href`                                  |
+| [`link-name`](docs/rules/link-name.md)                                           | 2.4.4   | A     | `<a>` must have discernible text or `aria-label`                     |
+| [`heading-has-content`](docs/rules/heading-has-content.md)                       | 2.4.6   | AA    | `<h1>`–`<h6>` must have non-empty content                            |
+| [`html-has-lang`](docs/rules/html-has-lang.md)                                   | 3.1.1   | A     | `<html>` must have a non-empty `lang` attribute                      |
+| [`lang-value`](docs/rules/lang-value.md)                                         | 3.1.1   | A     | `lang` attribute must contain a valid BCP 47 language tag            |
+| [`aria-hidden-on-focusable`](docs/rules/aria-hidden-on-focusable.md)             | 4.1.2   | A     | Disallow `aria-hidden="true"` on focusable elements                  |
+| [`aria-props`](docs/rules/aria-props.md)                                         | 4.1.2   | A     | `aria-*` attribute names must be valid ARIA properties               |
+| [`aria-proptypes`](docs/rules/aria-proptypes.md)                                 | 4.1.2   | A     | `aria-*` values must match the expected type                         |
+| [`aria-required-attr`](docs/rules/aria-required-attr.md)                         | 4.1.2   | A     | Required ARIA attributes for a role must be present                  |
+| [`aria-role`](docs/rules/aria-role.md)                                           | 4.1.2   | A     | `role` value must be a valid, non-abstract ARIA role                 |
+| [`button-name`](docs/rules/button-name.md)                                       | 4.1.2   | A     | `<button>` must have discernible text or `aria-label`                |
+| [`no-redundant-role`](docs/rules/no-redundant-role.md)                           | 4.1.2   | AA    | Explicit `role` must not duplicate the element's implicit role       |
+| [`role-supports-aria-props`](docs/rules/role-supports-aria-props.md)             | 4.1.2   | A     | `aria-*` attributes must be supported by the element's ARIA role     |
 
 ## ISML Support
 
@@ -113,7 +123,13 @@ This plugin was inspired by the following open-source projects:
 
 No source code was copied. All rule implementations were written from scratch following the patterns documented in the above projects.
 
-<!-- maybe reference the possibility to use the cli project -->
+<!-- suggest the use of https://github.com/nicolacarkaxhija/sfcc-a11y -->
+## sfcc-a11y
+This plugin was developed as part of the [sfcc-a11y](https://github.com/nicolacarkaxhija/sfcc-a11y) project. sfcc-a11y is an open-source accessibility toolkit for Salesforce Commerce Cloud, including:
+- `eslint-plugin-sfcc-a11y`: this ESLint plugin for ISML and XML linting
+- `sfcc-a11y-cli`: a command-line interface for running accessibility checks on SFCC projects, including an option to run `eslint-plugin-sfcc-a11y` without needing to set up ESLint separately
+- `sfcc-a11y-browser-extension`: a browser extension that surfaces accessibility issues directly in the storefront, using the same underlying rules as `eslint-plugin-sfcc-a11y`
+
 
 ## License
 
